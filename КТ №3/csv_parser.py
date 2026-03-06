@@ -3,7 +3,7 @@ from typing import List, Tuple, Any, Callable
 from functools import reduce
 
 
-def read_csv_file(filename: str) -> List[List[str]]:
+def read_csv_file(filename: str):
 
     with open(filename, 'r', encoding='utf-8') as file:
 
@@ -20,7 +20,7 @@ def read_csv_file(filename: str) -> List[List[str]]:
         return non_empty_lines
 
 
-def parse_value(value: str) -> Any:
+def parse_value(value: str):
 
     try:
         return int(value)
@@ -35,14 +35,14 @@ def parse_value(value: str) -> Any:
     return value
 
 
-def parse_row(row: List[str]) -> List[Any]:
+def parse_row(row: List[str]):
 
     return list(
         map(parse_value, row)
     )
 
 
-def get_books(filename: str) -> List[List[Any]]:
+def get_books(filename: str):
 
     all_rows = read_csv_file(filename)
 
@@ -53,16 +53,16 @@ def get_books(filename: str) -> List[List[Any]]:
     return data_rows
 
 
-def contains_substring(substring: str) -> Callable[[List[Any]], bool]:
+def contains_substring(substring: str):
 
-    def check_book(book: List[Any]) -> bool:
+    def check_book(book: List[Any]):
 
         return substring.lower() in book[1].lower()
     
     return check_book
 
 
-def transform_book(book: List[Any]) -> List[Any]:
+def transform_book(book: List[Any]):
 
     return [
         book[0], 
@@ -72,7 +72,7 @@ def transform_book(book: List[Any]) -> List[Any]:
     ]
 
 
-def filtered_books(books: List[List[Any]], substring: str) -> List[List[Any]]:
+def filtered_books(books: List[List[Any]], substring: str):
 
     filtered = list(
         filter(contains_substring(substring), books)
@@ -85,27 +85,27 @@ def filtered_books(books: List[List[Any]], substring: str) -> List[List[Any]]:
     return transformed
 
 
-def calculate_total_price(book: List[Any]) -> Tuple[str, float]:
+def calculate_total_price(book: List[Any]):
 
     return (book[0], book[2] * book[3])
 
 
-def get_totals(books: List[List[Any]]) -> List[Tuple[str, float]]:
+def get_totals(books: List[List[Any]]):
 
     return list(
         map(calculate_total_price, books)
     )
 
 
-def compose(*functions: Callable) -> Callable:
+def compose(*functions: Callable):
 
-    def compose_two(f: Callable, g: Callable) -> Callable:
+    def compose_two(f: Callable, g: Callable):
         return lambda x: f(g(x))
     
     return reduce(compose_two, functions, lambda x: x)
 
 
-def print_books_table(books: List[List[Any]], title: str = "Books") -> None:
+def print_books_table(books: List[List[Any]], title: str = "Books"):
 
     print(f"\n{title}:")
     print("-" * 80)
