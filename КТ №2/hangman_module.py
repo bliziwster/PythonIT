@@ -17,7 +17,7 @@ game_state = {
 }
 
 
-def load_words_from_file() -> List[Tuple[str, str]]:
+def load_words_from_file():
 
     words_with_hints = []
 
@@ -31,7 +31,7 @@ def load_words_from_file() -> List[Tuple[str, str]]:
     return words_with_hints
 
 
-def load_gallows_stage(stage_number: int) -> str:
+def load_gallows_stage(stage_number: int):
 
     file_path = os.path.join(GALLOWS_FOLDER, f"stage_{stage_number}.txt")
     with open(file_path, 'r', encoding='utf-8') as file:
@@ -39,7 +39,7 @@ def load_gallows_stage(stage_number: int) -> str:
 
 
 
-def init_game() -> None:
+def init_game():
 
     words_with_hints = load_words_from_file()
     word_info = random.choice(words_with_hints)
@@ -53,37 +53,37 @@ def init_game() -> None:
     game_state["win"] = False
 
 
-def get_display_word() -> str:
+def get_display_word():
 
     return " ".join(game_state["display_word"])
 
 
-def get_hint() -> str:
+def get_hint():
 
     return game_state["hint"]
 
 
-def get_mistakes_count() -> int:
+def get_mistakes_count():
 
     return game_state["mistakes"]
 
 
-def is_game_over() -> bool:
+def is_game_over():
 
     return game_state["game_over"]
 
 
-def is_win() -> bool:
+def is_win():
 
     return game_state["win"]
 
 
-def get_gallows_display() -> str:
+def get_gallows_display():
 
     return load_gallows_stage(game_state["mistakes"])
 
 
-def process_guess(letter: str) -> Dict[str, any]:
+def process_guess(letter: str):
 
     letter = letter.upper()
     result = {
@@ -123,7 +123,7 @@ def process_guess(letter: str) -> Dict[str, any]:
     return result
 
 
-def get_game_state() -> Dict:
+def get_game_state():
 
     return {
         "display_word": get_display_word(),
